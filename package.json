@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@ant-design/react-native": "^5.0.1",
+    "babel-plugin-import": "^1.13.5",
     "expo": "~46.0.8",
     "expo-status-bar": "~1.4.0",
     "react": "18.0.0",
