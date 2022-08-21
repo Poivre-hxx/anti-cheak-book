@@ -53,12 +53,12 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   button: {
-    backgroundColor: '#F97163',
+    backgroundColor: "#F97163",
     margin: 25,
     borderRadius: 15,
     width: 134,
     height: 54,
-  }
+  },
 });
 
 export default class CoverPage extends React.Component {
@@ -77,14 +77,14 @@ export default class CoverPage extends React.Component {
           <Flex justify="center">
             <ImageBackground
               style={styles.book}
-              source={require("./imgs/pages.png")}
+              source={require("../../assets/imgs/pages.png")}
             >
               <Flex justify="center" direction="column">
                 <Text style={styles.anti}>反诈宝典</Text>
                 <Text style={styles.text}>沉浸式体验反诈实例</Text>
               </Flex>
               <Flex direction="row" justify="center">
-                <Button type="primary" style={styles.button}>游客进入</Button>
+                <Button type="primary" style={styles.button} onPressOut={()=>this.props.navigation.navigate('/home')}>游客进入</Button>
                 <Button type="primary" style={styles.button}>登陆进入</Button>
               </Flex>
             </ImageBackground>

@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import CoverPage from "./src/pages/cover/CoverPage";
+import LoginPage from "./src/pages/login/loginPage";
 
 export default function App() {
   return (
     <View>
-      <CoverPage/>
+      <LoginPage/>
     </View>
   );
 }
