@@ -4,7 +4,7 @@ import { Button, WingBlank, WhiteSpace, Flex } from "@ant-design/react-native";
 
 const Square1 = (props) => {
   const style = {
-    marginTop: 150,
+    marginTop: 70,
     borderRadius: 10,
     backgroundColor: "#fff",
     margin: 1,
@@ -52,52 +52,48 @@ const Line = (props) => {
   return <View style={style}></View>;
 };
 
-const Start = (props) => {
-  const style = {
+const styles = StyleSheet.create({
+  Start: {
     marginTop: 20,
     borderRadius: 9,
     backgroundColor: "#F97163",
     margin: 4,
     width: 156,
     height: 171,
-    marginLeft: 30,
+     marginRight: 15,
     marginBottom: 200,
-  };
-  return <View style={style}></View>;
-};
-const Review = (props) => {
-  const style = {
-    marginTop: 30,
+  },
+  Review: {
+    marginTop: 20,
     borderRadius: 9,
     backgroundColor: "#3851B2",
     margin: 4,
     width: 156,
     height: 171,
-    marginLeft: 30,
+     marginLeft: 15,
     marginBottom: 200,
-  };
-  return <View style={style}></View>;
-};
+  },
+});
 
-export default class HomePage extends React.Component {
-  render() {
-    return (
-      <ScrollView style={{ backgroundColor: "#eef1f2" }}>
-        <Flex justify="center">
-          <Square1 />
-        </Flex>
-        <Square2 />
-        <Flex justify="center" direction="row">
-          <Square3 />
-          <Square3 />
-          <Square3 />
-        </Flex>
-        <Line />
-        <Flex justify="center" direction="row">
-          <Start />
-          <Review />
-          </Flex>
-      </ScrollView>
-    );
-  }
+function HomePage({ navigation }) {
+  return (
+    <ScrollView style={{ backgroundColor: "#eef1f2" }}>
+      <Flex justify="center">
+        <Square1 />
+      </Flex>
+      <Square2 />
+      <Flex justify="center" direction="row">
+        <Square3 />
+        <Square3 />
+        <Square3 />
+      </Flex>
+      <Line />
+      <Flex justify="center" direction="row">
+        <Button type="primary" style={styles.Start} onPress={()=>navigation.navigate('Exam')}>开始答题</Button>
+        <Button type="primary" style={styles.Review}>错题查看</Button>
+      </Flex>
+    </ScrollView>
+  );
 }
+
+export default HomePage;

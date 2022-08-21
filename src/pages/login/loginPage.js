@@ -15,7 +15,7 @@ const SquareUP = (props) => {
     width: 306,
     height: 174,
     margin: 1,
-    marginTop: 150,
+    marginTop: 100,
   };
   return <View style={style}></View>;
 };
