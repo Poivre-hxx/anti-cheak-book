@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet, ImageBackground } from "react-native";
-import { Button, WingBlank, WhiteSpace, Flex } from "@ant-design/react-native";
+import React from "react";
+import { View, ScrollView, StyleSheet } from "react-native";
+import { List } from "@ant-design/react-native";
 
 const Square = (props) => {
   const style = {
@@ -13,18 +13,26 @@ const Square = (props) => {
   return <View style={style}></View>;
 };
 
-export default class ProfilePage extends React.Component {
-  render() {
-    return (
-      <ScrollView style={{ backgroundColor: "#eef1f2" }}>
-        <Flex justify="center" direction='column' style={{ marginBottom: 500, marginTop: 100}}>
-          <Square/>
-          <Square/>
-          <Square/>
-          <Square/>
-          <Square/>
-        </Flex>
-      </ScrollView>
-    )
-  }
+const Item = List.Item;
+
+const styles = StyleSheet.create({
+  sheet: {
+    backgroundColor: "#fff",
+    height: 60,
+  },
+});
+
+function ProfilePage({ navigation }) {
+  return (
+    <ScrollView style={{ backgroundColor: "#eef1f2" }}>
+      <List renderHeader={" "}>
+        <Item style={styles.sheet}>头像</Item>
+        <Item style={styles.sheet}>昵称</Item>
+        <Item style={styles.sheet}>性别</Item>
+        <Item style={styles.sheet}>出生年月</Item>
+      </List>
+    </ScrollView>
+  );
 }
+
+export default ProfilePage;
