@@ -57,7 +57,7 @@ const SquareDown = (props) => {
 
 const Line = (props) => {
   const style = {
-    marginTop: 40,
+    marginTop: 20,
     borderRadius: 9,
     backgroundColor: "#707070",
     margin: 4,
@@ -68,28 +68,19 @@ const Line = (props) => {
 };
 
 const styles = StyleSheet.create({
-  head: {
-    backgroundColor: "#3851B2",
-    height: 80,
-    width: 80,
-    borderRadius: 50,
-    marginBottom: -135,
-    marginTop: 30,
+  img: {
+    marginTop: 50,
+    marginBottom: -270,
+    height: 250,
+    width: 250,
     zIndex: 1,
-  },
-  photo: {
-    height: 80,
-    width: 80,
-    borderRadius: 50,
-    marginBottom: 0,
-    marginTop: 30,
-    marginRight: 0,
   },
   text: {
     textAlign: "center",
     fontSize: 20,
     letterSpacing: 5,
-    marginTop: 15,
+    marginTop: 20,
+
     fontWeight: "bold",
   },
   button: {
@@ -108,16 +99,7 @@ function LoginPage({ navigation }) {
   return (
     <ScrollView style={{ backgroundColor: "#eef1f2" }}>
       <Flex justify="center" direction="column">
-        <Button
-          type="primary"
-          style={styles.head}
-          onPress={() => navigation.navigate("Profile")}
-        >
-          <Image
-            source={require("../../assets/imgs/avatar.png")}
-            style={styles.photo}
-          ></Image>
-        </Button>
+        <Image source={require("../../assets/imgs/home.png")} style={styles.img}></Image>
         <SquareUP />
         <Text style={styles.text}>Welcome Back!</Text>
         <Line />

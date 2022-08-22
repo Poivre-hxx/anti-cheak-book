@@ -1,15 +1,15 @@
 import React from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet, Image } from "react-native";
 import { Button, Flex } from "@ant-design/react-native";
 
-const Square1 = (props) => {
+const SquareUP = (props) => {
   const style = {
-    marginTop: 70,
-    borderRadius: 10,
     backgroundColor: "#fff",
+    borderRadius: 15,
+    width: 306,
+    height: 174,
     margin: 1,
-    width: 327,
-    height: 176,
+    marginTop: 100,
   };
   return <View style={style}></View>;
 };
@@ -53,6 +53,23 @@ const Line = (props) => {
 };
 
 const styles = StyleSheet.create({
+  head: {
+    backgroundColor: "#3851B2",
+    height: 80,
+    width: 80,
+    borderRadius: 50,
+    marginBottom: -135,
+    marginTop: 50,
+    zIndex: 1,
+  },
+  photo: {
+    height: 80,
+    width: 80,
+    borderRadius: 50,
+    marginBottom: 0,
+    marginTop: 50,
+    marginRight: 10,
+  },
   Start: {
     marginTop: 20,
     borderRadius: 9,
@@ -60,7 +77,7 @@ const styles = StyleSheet.create({
     margin: 4,
     width: 156,
     height: 171,
-     marginRight: 15,
+    marginRight: 15,
     marginBottom: 200,
   },
   Review: {
@@ -70,7 +87,7 @@ const styles = StyleSheet.create({
     margin: 4,
     width: 156,
     height: 171,
-     marginLeft: 15,
+    marginLeft: 15,
     marginBottom: 200,
   },
 });
@@ -78,8 +95,18 @@ const styles = StyleSheet.create({
 function HomePage({ navigation }) {
   return (
     <ScrollView style={{ backgroundColor: "#eef1f2" }}>
-      <Flex justify="center">
-        <Square1 />
+      <Flex justify="center" direction="column">
+        <Button
+          type="primary"
+          style={styles.head}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <Image
+            source={require("../../assets/imgs/avatar.png")}
+            style={styles.photo}
+          ></Image>
+        </Button>
+        <SquareUP />
       </Flex>
       <Square2 />
       <Flex justify="center" direction="row">
@@ -89,8 +116,16 @@ function HomePage({ navigation }) {
       </Flex>
       <Line />
       <Flex justify="center" direction="row">
-        <Button type="primary" style={styles.Start} onPress={()=>navigation.navigate('Exam')}>开始答题</Button>
-        <Button type="primary" style={styles.Review}>错题查看</Button>
+        <Button
+          type="primary"
+          style={styles.Start}
+          onPress={() => navigation.navigate("Exam")}
+        >
+          开始答题
+        </Button>
+        <Button type="primary" style={styles.Review}>
+          错题查看
+        </Button>
       </Flex>
     </ScrollView>
   );
