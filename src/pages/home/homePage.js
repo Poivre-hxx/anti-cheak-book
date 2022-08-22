@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
-import { Button, WingBlank, WhiteSpace, Flex } from "@ant-design/react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
+import { Button, Flex } from "@ant-design/react-native";
 
 const Square1 = (props) => {
   const style = {
