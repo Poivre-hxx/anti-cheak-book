@@ -1,12 +1,8 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  ImageBackground,
-} from "react-native";
-import { Button, WingBlank, WhiteSpace, Flex } from "@ant-design/react-native";
+import { StyleSheet, View, ScrollView, ImageBackground } from "react-native";
+import { List, Flex } from "@ant-design/react-native";
+
+const Item = List.Item;
 
 const SquareUP = (props) => {
   const style = {
@@ -14,9 +10,15 @@ const SquareUP = (props) => {
     backgroundColor: "#fff",
     width: 308,
     height: 218,
-    marginTop: 500,
+    marginTop: 420,
   };
-  return <View style={style}></View>;
+  return (
+    <View style={style}>
+      <List>
+        <Item>题目</Item>
+      </List>
+    </View>
+  );
 };
 
 const SquareDown = (props) => {
@@ -27,8 +29,15 @@ const SquareDown = (props) => {
     height: 283,
     marginTop: 50,
   };
-  return <View style={style}></View>;
+  return (
+    <View style={style}>
+      <List>
+        <Item>答案</Item>
+      </List>
+    </View>
+  );
 };
+
 const styles = StyleSheet.create({
   blue: {
     width: 470,
@@ -48,8 +57,8 @@ export default class ExamPage extends React.Component {
             source={require("../../assets/imgs/blue.png")}
           >
             <Flex justify="center" direction="column">
-            <SquareUP />
-            <SquareDown />
+              <SquareUP />
+              <SquareDown />
             </Flex>
           </ImageBackground>
         </Flex>
