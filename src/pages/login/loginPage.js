@@ -29,7 +29,6 @@ const SquareDown = (props) => {
         <InputItem
           clear
           type="number"
-          value=""
           // onChange={(value) => {
           //   this.setState({
           //     number: value,
@@ -42,7 +41,6 @@ const SquareDown = (props) => {
         <InputItem
           clear
           type="password"
-          value=""
           // onChange={(value) => {
           //   this.setState({
           //     password: value,
