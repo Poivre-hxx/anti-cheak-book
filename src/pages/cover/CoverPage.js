@@ -5,8 +5,9 @@ import {
   View,
   ScrollView,
   ImageBackground,
+  Image,
 } from "react-native";
-import { Button, WingBlank, Flex } from "@ant-design/react-native";
+import { Button, WingBlank, Flex, Carousel } from "@ant-design/react-native";
 
 const Circle = (props) => {
   const style = {
@@ -19,21 +20,11 @@ const Circle = (props) => {
   return <View style={style}></View>;
 };
 
-const Square = (props) => {
-  const style = {
-    backgroundColor: "#A1B4FF",
-    width: 220,
-    height: 280,
-    margin: 1,
-  };
-  return <View style={style}></View>;
-};
-
 const styles = StyleSheet.create({
   book: {
     width: 420,
     height: 420,
-    marginTop: 30,
+    marginTop: -50,
     bottom: 0,
   },
   anti: {
@@ -41,7 +32,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 50,
     letterSpacing: 30,
-    marginTop: 100,
+    marginTop: 150,
     marginLeft: 30,
   },
   text: {
@@ -59,6 +50,16 @@ const styles = StyleSheet.create({
     width: 134,
     height: 54,
   },
+  wrapper: {
+    height: 350,
+  },
+  graph: {
+    height: 350,
+    width: 280,
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
 
 function CoverPage({ navigation }) {
@@ -69,7 +70,20 @@ function CoverPage({ navigation }) {
           <Circle />
         </View>
         <Flex justify="center">
-          <Square />
+          <View style={{ width: 280, height: 350, backgroundColor: "#fff", marginTop: 20}}>
+            {/* 走马灯 */}
+            <Carousel style={styles.wrapper} selectedIndex={0} autoplay infinite>
+              <View>
+                <Image style={styles.graph} source={require("../../assets/imgs/cover1.png")}></Image>
+              </View>
+              <View>
+                <Image style={styles.graph} source={require("../../assets/imgs/cover2.png")}></Image>
+              </View>
+              {/* <View>
+              <Image style={styles.graph} source={require("../../assets/imgs/home.png")}></Image>
+              </View> */}
+            </Carousel>
+          </View>
         </Flex>
       </WingBlank>
       <WingBlank size="lg">
