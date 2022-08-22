@@ -2,7 +2,7 @@
   "expo": {
     "name": "反诈宝典",
     "slug": "anti-cheak-book",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./src/assets/icons/appIcon.png",
     "userInterfaceStyle": "light",
