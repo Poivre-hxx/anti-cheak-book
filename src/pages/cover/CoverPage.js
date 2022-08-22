@@ -5,9 +5,8 @@ import {
   View,
   ScrollView,
   ImageBackground,
-  Alert,
 } from "react-native";
-import { Button, WingBlank, WhiteSpace, Flex } from "@ant-design/react-native";
+import { Button, WingBlank, Flex } from "@ant-design/react-native";
 
 const Circle = (props) => {
   const style = {
@@ -62,47 +61,49 @@ const styles = StyleSheet.create({
   },
 });
 
-function CoverPage({navigation}){
-    return (
-        <ScrollView style={{ backgroundColor: "#eef1f2" }}>
-
-          <WingBlank size="md" style={{ marginTop: -15 }}>
-            <View style={{ marginLeft: 9, marginTop: 30 }}>
-              <Circle />
-            </View>
-            <Flex justify="center">
-              <Square />
+function CoverPage({ navigation }) {
+  return (
+    <ScrollView style={{ backgroundColor: "#eef1f2" }}>
+      <WingBlank size="md" style={{ marginTop: -15 }}>
+        <View style={{ marginLeft: 9, marginTop: 30 }}>
+          <Circle />
+        </View>
+        <Flex justify="center">
+          <Square />
+        </Flex>
+      </WingBlank>
+      <WingBlank size="lg">
+        <Flex justify="center">
+          <ImageBackground
+            style={styles.book}
+            source={require("../../assets/imgs/pages.png")}
+          >
+            <Flex justify="center" direction="column">
+              <Text style={styles.anti}>反诈宝典</Text>
+              <Text style={styles.text}>沉浸式体验反诈实例</Text>
             </Flex>
-          </WingBlank>
-          <WingBlank size="lg">
-            <Flex justify="center">
-              <ImageBackground
-                style={styles.book}
-                source={require("../../assets/imgs/pages.png")}
+            <Flex direction="row" justify="center">
+              <Button
+                type="primary"
+                style={styles.button}
+                onPress={() => navigation.navigate("Home")}
               >
-                <Flex justify="center" direction="column">
-                  <Text style={styles.anti}>反诈宝典</Text>
-                  <Text style={styles.text}>沉浸式体验反诈实例</Text>
-                </Flex>
-                <Flex direction="row" justify="center">
-                  <Button
-                    type="primary"
-                    style={styles.button}
-                    onPress={() => navigation.navigate('Home')}
-                  >
-                    游客进入
-                  </Button>
+                游客进入
+              </Button>
 
-                  <Button type="primary" style={styles.button} onPress={()=>navigation.navigate('Login')}>
-                    登陆进入
-                  </Button>
-                </Flex>
-              </ImageBackground>
+              <Button
+                type="primary"
+                style={styles.button}
+                onPress={() => navigation.navigate("Login")}
+              >
+                登陆进入
+              </Button>
             </Flex>
-          </WingBlank>
-        </ScrollView>
-    );
+          </ImageBackground>
+        </Flex>
+      </WingBlank>
+    </ScrollView>
+  );
 }
 
 export default CoverPage;
-

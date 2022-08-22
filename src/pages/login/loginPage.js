@@ -1,17 +1,11 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  ImageBackground,
-} from "react-native";
-import { Button, WingBlank, WhiteSpace, Flex } from "@ant-design/react-native";
+import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import { Button, Flex, InputItem } from "@ant-design/react-native";
 
 const SquareUP = (props) => {
   const style = {
+    backgroundColor: "#fff",
     borderRadius: 15,
-    backgroundColor: "#C0D8E0",
     width: 306,
     height: 174,
     margin: 1,
@@ -29,7 +23,38 @@ const SquareDown = (props) => {
     margin: 1,
     marginTop: 30,
   };
-  return <View style={style}></View>;
+  return (
+    <View style={style}>
+      <View style={styles.item}>
+        <InputItem
+          clear
+          type="number"
+          value=""
+          // onChange={(value) => {
+          //   this.setState({
+          //     number: value,
+          //   });
+          // }}
+          placeholder="zhanghao"
+        >
+          账号
+        </InputItem>
+        <InputItem
+          clear
+          type="password"
+          value=""
+          // onChange={(value) => {
+          //   this.setState({
+          //     password: value,
+          //   });
+          // }}
+          placeholder="password"
+        >
+          密码
+        </InputItem>
+      </View>
+    </View>
+  );
 };
 
 const Line = (props) => {
@@ -45,6 +70,23 @@ const Line = (props) => {
 };
 
 const styles = StyleSheet.create({
+  head: {
+    backgroundColor: "#3851B2",
+    height: 80,
+    width: 80,
+    borderRadius: 50,
+    marginBottom: -135,
+    marginTop: 30,
+    zIndex: 1,
+  },
+  photo: {
+    height: 80,
+    width: 80,
+    borderRadius: 50,
+    marginBottom: 0,
+    marginTop: 30,
+    marginRight: 0,
+  },
   text: {
     textAlign: "center",
     fontSize: 20,
@@ -58,21 +100,39 @@ const styles = StyleSheet.create({
     height: 50,
     marginTop: 30,
     marginBottom: 300,
-  }
+  },
+  item: {
+    marginTop: 45,
+  },
 });
 
-export default class LoginPage extends React.Component {
-  render() {
-    return (
-      <ScrollView style={{ backgroundColor: "#eef1f2" }}>
-        <Flex justify="center" direction="column">
-          <SquareUP />
-          <Text style={styles.text}>Welcome Back!</Text>
-          <Line />
-          <SquareDown />
-          <Button type="primary" style={styles.button}>登录</Button>
-        </Flex>
-      </ScrollView>
-    )
-  }
+function LoginPage({ navigation }) {
+  return (
+    <ScrollView style={{ backgroundColor: "#eef1f2" }}>
+      <Flex justify="center" direction="column">
+        <Button
+          type="primary"
+          style={styles.head}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <Image
+            source={require("../../assets/imgs/avatar.png")}
+            style={styles.photo}
+          ></Image>
+        </Button>
+        <SquareUP />
+        <Text style={styles.text}>Welcome Back!</Text>
+        <Line />
+        <SquareDown />
+        <Button
+          type="primary"
+          style={styles.button}
+          onPress={() => navigation.navigate("Home")}
+        >
+          登录
+        </Button>
+      </Flex>
+    </ScrollView>
+  );
 }
+export default LoginPage;
