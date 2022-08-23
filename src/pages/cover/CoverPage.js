@@ -79,9 +79,9 @@ function CoverPage({ navigation }) {
               <View>
                 <Image style={styles.graph} source={require("../../assets/imgs/cover2.png")}></Image>
               </View>
-              {/* <View>
-              <Image style={styles.graph} source={require("../../assets/imgs/home.png")}></Image>
-              </View> */}
+              <View>
+              <Image style={styles.graph} source={require("../../assets/imgs/cover3.png")}></Image>
+              </View>
             </Carousel>
           </View>
         </Flex>

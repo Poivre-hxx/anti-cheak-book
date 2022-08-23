@@ -2,7 +2,7 @@
   "expo": {
     "name": "反诈宝典",
     "slug": "anti-cheak-book",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./src/assets/icons/appIcon.png",
     "userInterfaceStyle": "light",
@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.po1vre.anticheakbook"
     },
     "android": {
       "adaptiveIcon": {
