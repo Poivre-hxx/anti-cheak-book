@@ -1,4 +1,5 @@
 node_modules/
+README.assets/
 .expo/
 dist/
 npm-debug.*
