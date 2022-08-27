@@ -1,4 +1,4 @@
-<img src="https://github.com/Poivre-hxx/anti-cheak-book/blob/master/src/assets/icons/appIcon.png" style="zoom:150%;" />
+<p align="center"><img src="https://github.com/Poivre-hxx/anti-cheak-book/blob/master/src/assets/icons/appIcon.png" style="zoom:150%;" /></p>
 
 <h1 align="center">Anti-Cheak Book</h1>
 
