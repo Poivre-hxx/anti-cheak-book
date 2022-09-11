@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Button, WingBlank, Flex, Carousel } from "@ant-design/react-native";
 
-const Circle = (props) => {
+const Circle = props => {
   const style = {
     borderRadius: 25,
     backgroundColor: "#3851B2",
@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
     height: 350,
     width: 280,
     flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 
 function CoverPage({ navigation }) {
@@ -70,17 +70,38 @@ function CoverPage({ navigation }) {
           <Circle />
         </View>
         <Flex justify="center">
-          <View style={{ width: 280, height: 350, backgroundColor: "#fff", marginTop: 20}}>
+          <View
+            style={{
+              width: 280,
+              height: 350,
+              backgroundColor: "#fff",
+              marginTop: 20,
+            }}
+          >
             {/* 走马灯 */}
-            <Carousel style={styles.wrapper} selectedIndex={0} autoplay infinite>
+            <Carousel
+              style={styles.wrapper}
+              selectedIndex={0}
+              autoplay
+              infinite
+            >
               <View>
-                <Image style={styles.graph} source={require("../../assets/imgs/cover1.png")}></Image>
+                <Image
+                  style={styles.graph}
+                  source={require("../../assets/imgs/cover1.png")}
+                ></Image>
               </View>
               <View>
-                <Image style={styles.graph} source={require("../../assets/imgs/cover2.png")}></Image>
+                <Image
+                  style={styles.graph}
+                  source={require("../../assets/imgs/cover2.png")}
+                ></Image>
               </View>
               <View>
-              <Image style={styles.graph} source={require("../../assets/imgs/cover3.png")}></Image>
+                <Image
+                  style={styles.graph}
+                  source={require("../../assets/imgs/cover3.png")}
+                ></Image>
               </View>
             </Carousel>
           </View>

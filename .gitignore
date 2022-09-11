@@ -3,6 +3,8 @@ README.assets/
 .expo/
 dist/
 npm-debug.*
+yarn-debug.log*
+yarn-error.log*
 *.jks
 *.p8
 *.p12
