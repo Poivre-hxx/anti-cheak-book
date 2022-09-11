@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import { Button, WingBlank, Flex, Carousel } from "@ant-design/react-native";
+import Storage from "@/utils/storage";
 
 const Circle = props => {
   const style = {
@@ -63,6 +64,13 @@ const styles = StyleSheet.create({
 });
 
 function CoverPage({ navigation }) {
+  useEffect(() => {
+    (async () => {
+      const token = await Storage.get("token");
+      if (token) navigation.navigate("Home");
+    })();
+  }, []);
+
   return (
     <ScrollView style={{ backgroundColor: "#eef1f2" }}>
       <WingBlank size="md" style={{ marginTop: -15 }}>

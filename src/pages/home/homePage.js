@@ -1,8 +1,8 @@
-import React from "react";
 import { View, ScrollView, StyleSheet, Image } from "react-native";
-import { Button, Flex } from "@ant-design/react-native";
+import { Button, Flex, Provider, Toast } from "@ant-design/react-native";
+import Storage from "@/utils/storage";
 
-const SquareUP = (props) => {
+const SquareUP = props => {
   const style = {
     backgroundColor: "#fff",
     borderRadius: 15,
@@ -14,7 +14,7 @@ const SquareUP = (props) => {
   return <View style={style}></View>;
 };
 
-const Square2 = (props) => {
+const Square2 = props => {
   const style = {
     marginTop: 20,
     borderRadius: 10,
@@ -27,7 +27,7 @@ const Square2 = (props) => {
   return <View style={style}></View>;
 };
 
-const Square3 = (props) => {
+const Square3 = props => {
   const style = {
     marginTop: 20,
     borderRadius: 9,
@@ -39,7 +39,7 @@ const Square3 = (props) => {
   return <View style={style}></View>;
 };
 
-const Line = (props) => {
+const Line = props => {
   const style = {
     marginTop: 20,
     borderRadius: 9,
@@ -93,41 +93,56 @@ const styles = StyleSheet.create({
 });
 
 function HomePage({ navigation }) {
+  const logOut = async () => {
+    Toast.success("退出成功！", 1);
+    await Storage.remove("token");
+    setTimeout(() => {
+      navigation.navigate("Cover");
+    }, 1000);
+  };
+
   return (
-    <ScrollView style={{ backgroundColor: "#eef1f2" }}>
-      <Flex justify="center" direction="column">
-        <Button
-          type="primary"
-          style={styles.head}
-          onPress={() => navigation.navigate("Profile")}
-        >
-          <Image
-            source={require("../../assets/imgs/avatar.png")}
-            style={styles.photo}
-          ></Image>
-        </Button>
-        <SquareUP />
-      </Flex>
-      <Square2 />
-      <Flex justify="center" direction="row">
-        <Square3 />
-        <Square3 />
-        <Square3 />
-      </Flex>
-      <Line />
-      <Flex justify="center" direction="row">
-        <Button
-          type="primary"
-          style={styles.Start}
-          onPress={() => navigation.navigate("Exam")}
-        >
-          开始答题
-        </Button>
-        <Button type="primary" style={styles.Review}>
-          错题查看
-        </Button>
-      </Flex>
-    </ScrollView>
+    <Provider>
+      <ScrollView style={{ backgroundColor: "#eef1f2" }}>
+        <Flex justify="center" direction="column">
+          <Button
+            type="primary"
+            style={styles.head}
+            onPress={() => navigation.navigate("Profile")}
+          >
+            <Image
+              source={require("../../assets/imgs/avatar.png")}
+              style={styles.photo}
+            ></Image>
+          </Button>
+          <SquareUP />
+        </Flex>
+        <Square2 />
+        <Flex justify="center" direction="row">
+          <Square3 />
+          <Square3 />
+          <Square3 />
+        </Flex>
+        <Line />
+        <Flex justify="center" direction="row">
+          <Button
+            type="primary"
+            style={styles.Start}
+            onPress={() => navigation.navigate("Exam")}
+          >
+            开始答题
+          </Button>
+          <Button type="primary" style={styles.Review}>
+            错题查看
+          </Button>
+        </Flex>
+        <Flex justify="center" direction="row">
+          <Button type="primary" onPress={logOut}>
+            退出登录
+          </Button>
+        </Flex>
+      </ScrollView>
+    </Provider>
   );
 }
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import { Text, View, ScrollView, Image } from "react-native";
 import {
   Button,
   Flex,
@@ -8,38 +8,11 @@ import {
   Provider,
   Toast,
 } from "@ant-design/react-native";
-import { login } from "../../api/auth";
+import { login } from "@/api/auth";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import Storage from "../../utils/storage";
-
-const styles = StyleSheet.create({
-  img: {
-    marginTop: 50,
-    marginBottom: -270,
-    height: 250,
-    width: 250,
-    zIndex: 1,
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 20,
-    letterSpacing: 5,
-    marginTop: 20,
-
-    fontWeight: "bold",
-  },
-  button: {
-    backgroundColor: "#3851B2",
-    width: 185,
-    height: 50,
-    marginTop: 30,
-    marginBottom: 300,
-  },
-  item: {
-    marginTop: 45,
-  },
-});
+import Storage from "@/utils/storage";
+import styles from "./styles";
 
 const LoginPage = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -52,22 +25,14 @@ const LoginPage = ({ navigation }) => {
   });
 
   useEffect(() => {
-    async function prepare() {
-      await SplashScreen.preventAutoHideAsync();
-    }
-
-    prepare();
+    SplashScreen.preventAutoHideAsync();
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
+    if (fontsLoaded) await SplashScreen.hideAsync();
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  if (!fontsLoaded) return;
 
   const handleClick = async () => {
     if (!username || !password) {
@@ -108,43 +73,16 @@ const LoginPage = ({ navigation }) => {
               source={require("../../assets/imgs/home.png")}
               style={styles.img}
             ></Image>
-            <View
-              style={{
-                backgroundColor: "#fff",
-                borderRadius: 15,
-                width: 306,
-                height: 174,
-                margin: 1,
-                marginTop: 100,
-              }}
-            ></View>
+            <View style={styles.view1} />
             <Text style={styles.text}>Welcome Back!</Text>
-            <View
-              style={{
-                marginTop: 20,
-                borderRadius: 9,
-                backgroundColor: "#707070",
-                margin: 4,
-                width: 304,
-                height: 1,
-              }}
-            ></View>
-            <View
-              style={{
-                borderRadius: 15,
-                backgroundColor: "#fff",
-                width: 306,
-                height: 206,
-                margin: 1,
-                marginTop: 30,
-              }}
-            >
+            <View style={styles.view2} />
+            <View style={styles.view3}>
               <View style={styles.item}>
                 <List>
                   <InputItem
                     clear
                     error={usernameErr}
-                    type="number"
+                    type="text"
                     onChange={value => {
                       setUsername(value);
                     }}

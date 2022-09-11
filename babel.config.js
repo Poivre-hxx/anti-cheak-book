@@ -1,9 +1,20 @@
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo'],
+    presets: ["babel-preset-expo"],
     plugins: [
-      ['import', {libraryName: '@ant-design/react-native'}], // 与 Web 平台的区别是不需要设置 style
+      ["import", { libraryName: "@ant-design/react-native" }], // 与 Web 平台的区别是不需要设置 style,
+      [
+        "babel-plugin-root-import",
+        {
+          paths: [
+            {
+              rootPathSuffix: "./src/",
+              rootPathPrefix: "@/",
+            },
+          ],
+        },
+      ],
     ],
   };
 };
