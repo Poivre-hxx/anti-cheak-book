@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     marginBottom: 300,
   },
   item: {
-    marginTop: 45,
+    marginTop: 30,
   },
   view1: {
     backgroundColor: "#fff",
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     margin: 1,
     marginTop: 100,
   },
-  view2: {
+  line: {
     marginTop: 20,
     borderRadius: 9,
     backgroundColor: "#707070",
@@ -48,6 +48,14 @@ const styles = StyleSheet.create({
     height: 206,
     margin: 1,
     marginTop: 30,
+  },
+  register: {
+    fontSize: 14,
+    textAlign: "center",
+    marginTop: 20,
+  },
+  register_text: {
+    color: "#345DFE",
   },
 });
 

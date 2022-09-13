@@ -1,4 +1,3 @@
-import { useNavigationState } from "@react-navigation/native";
 import { ScrollView, StyleSheet, Image } from "react-native";
 import { List, Flex, Button, Provider, Toast } from "@ant-design/react-native";
 import Storage from "@/utils/storage";

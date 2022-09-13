@@ -15,10 +15,14 @@ import Storage from "@/utils/storage";
 import styles from "./styles";
 
 const LoginPage = ({ navigation }) => {
-  const [username, setUsername] = useState("");
-  const [usernameErr, setUsernameErr] = useState(false);
-  const [password, setPassword] = useState("");
-  const [passwordErr, setPasswordErr] = useState(false);
+  const [username, setUsername] = useState({
+    value: "",
+    err: false,
+  });
+  const [password, setPassword] = useState({
+    value: "",
+    err: false,
+  });
 
   const [fontsLoaded] = useFonts({
     antoutline: require("@ant-design/icons-react-native/fonts/antoutline.ttf"),
@@ -35,27 +39,22 @@ const LoginPage = ({ navigation }) => {
   if (!fontsLoaded) return;
 
   const handleClick = async () => {
-    if (!username || !password) {
-      if (!username) {
-        setUsernameErr(true);
-      }
-      if (!password) {
-        setPasswordErr(true);
-      }
+    if (!username.value || !password.value) {
+      if (!username.value) setUsername({ ...username, err: true });
+      if (!password.value) setPassword({ ...password, err: true });
       Toast.fail("用户名或密码不能为空！", 1);
       return;
     }
-    setUsernameErr(false);
-    setPasswordErr(false);
-    const res = await login(username, password);
+    setUsername({ ...username, err: false });
+    setPassword({ ...password, err: false });
+    const res = await login(username.value, password.value);
     if (res.code === 40002) {
       Toast.fail("用户不存在！", 1);
-      setUsernameErr(true);
-      setPasswordErr(true);
+      setUsername({ ...username, err: true });
     }
     if (res.code === 40003) {
       Toast.fail("密码错误！", 1);
-      setPasswordErr(true);
+      setPassword({ ...password, err: true });
     }
     if (res.code === 2000) {
       Toast.success("登录成功！正在为您跳转", 1);
@@ -72,19 +71,19 @@ const LoginPage = ({ navigation }) => {
             <Image
               source={require("../../assets/imgs/home.png")}
               style={styles.img}
-            ></Image>
+            />
             <View style={styles.view1} />
             <Text style={styles.text}>Welcome Back!</Text>
-            <View style={styles.view2} />
+            <View style={styles.line} />
             <View style={styles.view3}>
               <View style={styles.item}>
                 <List>
                   <InputItem
                     clear
-                    error={usernameErr}
+                    error={username.err}
                     type="text"
                     onChange={value => {
-                      setUsername(value);
+                      setUsername({ value, err: false });
                     }}
                     placeholder="请输入账号"
                   >
@@ -92,16 +91,25 @@ const LoginPage = ({ navigation }) => {
                   </InputItem>
                   <InputItem
                     clear
-                    error={passwordErr}
+                    error={password.err}
                     type="password"
                     onChange={value => {
-                      setPassword(value);
+                      setPassword({ value, err: false });
                     }}
                     placeholder="请输入密码"
                   >
                     密码
                   </InputItem>
                 </List>
+                <Text style={styles.register}>
+                  没有账号？立即
+                  <Text
+                    style={styles.register_text}
+                    onPress={() => navigation.navigate("Register")}
+                  >
+                    注册！
+                  </Text>
+                </Text>
               </View>
             </View>
             <Button type="primary" style={styles.button} onPress={handleClick}>

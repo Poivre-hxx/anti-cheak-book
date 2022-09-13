@@ -6,5 +6,5 @@ export const login = async (username, password) => {
 };
 
 export const register = async (username, password) => {
-  return request.post("/auth/register", { username, phoneNumber, password });
+  return request.post("/auth/register", { username, password });
 };
