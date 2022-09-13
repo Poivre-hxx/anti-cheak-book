@@ -1,25 +1,24 @@
-import { View, ScrollView, Image } from "react-native";
 import {
-  Button,
-  Flex,
-  Provider,
-  Toast,
-  Text,
-  WhiteSpace,
-} from "@ant-design/react-native";
-import Storage from "@/utils/storage";
+  View,
+  ScrollView,
+  Image,
+  Dimensions,
+  ImageBackground,
+} from "react-native";
+import { Button, Flex, Provider, Text } from "@ant-design/react-native";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "@/api/user";
 import styles from "./styles";
+import SizedImage from "@/components/SizedImage";
+
+const { width: ScreenWidth } = Dimensions.get("screen");
 
 function HomePage({ navigation }) {
   const [loaded, setLoaded] = useState(false);
   const [userInfo, setUserInfo] = useState({
     username: "",
-    nickName: "",
-    avatar: {
-      url: "",
-    },
+    nickname: "",
+    avatar: "",
     birthday: "",
     sex: 0,
   });
@@ -28,81 +27,86 @@ function HomePage({ navigation }) {
     (async () => {
       const res = await getUserInfo();
       if (res.code === 2000) {
-        setUserInfo({
-          username: res.data.user.username,
-          nickName: res.data.user.nickName,
-          avatar: {
-            url: res.data.user.avatar,
-          },
-          birthday: res.data.user.birthday,
-          sex: res.data.user.sex,
-        });
+        setUserInfo(res.data.user);
         setLoaded(true);
       }
       // @todo 错误处理
     })();
   }, []);
 
-  const logOut = async () => {
-    Toast.success("退出成功！", 1);
-    await Storage.remove("token");
-    setTimeout(() => {
-      navigation.navigate("Cover");
-    }, 1000);
-  };
-  if (!loaded) return <ScrollView></ScrollView>;
+  if (!loaded) return <View></View>;
 
   return (
     <Provider>
-      <ScrollView style={{ backgroundColor: "#eef1f2" }}>
+      <ScrollView style={styles.main}>
         <Flex justify="center" direction="column">
           <Button
             type="primary"
             style={styles.head}
-            onPress={() => navigation.navigate("Profile")}
+            onPress={() => navigation.navigate("Profile", { userInfo })}
           >
             <Image
               source={
-                userInfo.avatar || require("../../assets/imgs/avatar.png")
+                { url: userInfo.avatar } || require("@/assets/imgs/avatar.png")
               }
               style={styles.photo}
             ></Image>
           </Button>
-          <View style={styles.SquareUP}>
-            <Flex Flex justify="center" direction="col">
-              <Text style={styles.nickName}>
-                {userInfo.nickName || `DefaultUser${userInfo.username}`}
-              </Text>
-              <Text style={styles.username}>@{userInfo.username}</Text>
-              <Text>最高记录：100{}分</Text>
-            </Flex>
+          <View style={{ position: "relative" }}>
+            <ImageBackground
+              source={require("@/assets/home/info.png")}
+              style={styles.info}
+            >
+              <Flex
+                Flex
+                justify="center"
+                direction="col"
+                style={styles.info_text}
+              >
+                <Text style={styles.nickname}>
+                  {userInfo.nickname || `DefaultUser${userInfo.username}`}
+                </Text>
+                <Text style={styles.username}>@{userInfo.username}</Text>
+                {/* <View style={styles.line}></View> */}
+                <Text>最高记录：100{}分</Text>
+              </Flex>
+            </ImageBackground>
           </View>
         </Flex>
-        <View style={styles.Square2}></View>
+        <View style={styles.btn}>
+          <Text style={styles.btn_text}>数据分析</Text>
+        </View>
         <Flex justify="center" direction="row">
-          <View style={styles.Square3}></View>
-          <View style={styles.Square3}></View>
-          <View style={styles.Square3}></View>
+          <ImageBackground
+            style={styles.category}
+            source={require("@/assets/home/category.png")}
+          ></ImageBackground>
+          <ImageBackground
+            style={styles.category}
+            source={require("@/assets/home/category.png")}
+          ></ImageBackground>
+          <ImageBackground
+            style={styles.category}
+            source={require("@/assets/home/category.png")}
+          ></ImageBackground>
         </Flex>
-        <View style={styles.Line}></View>
         <Flex justify="center" direction="row">
           <Button
-            type="primary"
-            style={styles.Start}
+            style={styles.start}
             onPress={() => navigation.navigate("Exam")}
           >
-            开始答题
+            <Text style={styles.start_text}>开始</Text>
           </Button>
-          <Button type="primary" style={styles.Review}>
-            错题查看
-          </Button>
-        </Flex>
-        <Flex justify="center" direction="row">
-          <Button type="primary" onPress={logOut}>
-            退出登录
+          <Button style={styles.review}>
+            <Text style={styles.start_text}>错题查看</Text>
           </Button>
         </Flex>
       </ScrollView>
+      <SizedImage
+        style={styles.bg}
+        width={ScreenWidth}
+        source={require("@/assets/home/bg.png")}
+      />
     </Provider>
   );
 }

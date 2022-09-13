@@ -1,6 +1,15 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  bg: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 0,
+  },
+  main: {
+    zIndex: 1,
+  },
   head: {
     backgroundColor: "#3851B2",
     height: 80,
@@ -18,7 +27,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginRight: 10,
   },
-  Start: {
+  start: {
     marginTop: 20,
     borderRadius: 9,
     backgroundColor: "#F97163",
@@ -28,7 +37,13 @@ const styles = StyleSheet.create({
     marginRight: 15,
     marginBottom: 200,
   },
-  Review: {
+  start_text: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 45,
+    flexWrap: "wrap",
+  },
+  review: {
     marginTop: 20,
     borderRadius: 9,
     backgroundColor: "#3851B2",
@@ -38,32 +53,36 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginBottom: 200,
   },
-  SquareUP: {
-    backgroundColor: "#fff",
-    borderRadius: 15,
-    width: 306,
-    height: 174,
-    margin: 1,
+  info: {
+    width: 320,
+    height: 200,
     marginTop: 100,
   },
-  Square2: {
-    marginTop: 20,
+  info_text: {},
+  btn: {
+    marginVertical: 20,
     borderRadius: 10,
     backgroundColor: "#AFBDF1",
     margin: 1,
     width: 108,
     height: 40,
     marginLeft: 30,
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
   },
-  Square3: {
-    marginTop: 20,
-    borderRadius: 9,
-    backgroundColor: "#FFF",
+  btn_text: {
+    textAlign: "center",
+    fontSize: 23,
+    color: "#3F51B0",
+    fontWeight: "bold",
+  },
+  category: {
     margin: 4,
     width: 108,
     height: 108,
   },
-  Line: {
+  line: {
     marginTop: 20,
     borderRadius: 9,
     backgroundColor: "#707070",
@@ -72,7 +91,7 @@ const styles = StyleSheet.create({
     height: 1,
     marginLeft: 30,
   },
-  nickName: {
+  nickname: {
     fontSize: 18,
     fontWeight: "bold",
     paddingTop: 50,
