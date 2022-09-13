@@ -1,123 +1,75 @@
-import React from "react";
-import { StyleSheet, View, ScrollView, ImageBackground } from "react-native";
+import { useEffect, useState } from "react";
+import { View, ScrollView, ImageBackground } from "react-native";
 import { List, Flex, Text, Checkbox, Button } from "@ant-design/react-native";
-import msg from "./msg.json";
+import { getProblemInfo } from "@/api/user";
+import styles from "./styles";
 
 const Item = List.Item;
 
-const styles = StyleSheet.create({
-  squareUp: {
-    borderRadius: 15,
-    backgroundColor: "#fff",
-    width: 308,
-    height: 218,
-    marginTop: 420,
-  },
-  squareDown: {
-    borderRadius: 15,
-    backgroundColor: "#fff",
-    width: 308,
-    height: 283,
-    marginTop: 50,
-  },
-  title: {
-    margin: 5,
-    fontSize: 15,
-  },
-  blue: {
-    width: 470,
-    height: 430,
-    marginTop: -200,
-    marginBottom: 1000,
-  },
-  ans: {
-    width: 280,
-  },
-  button: {
-    width: 120,
-    height: 40,
-    marginTop: -55,
-    marginLeft: 150,
-  },
-});
+function ExamPage({ navigation }) {
+  const [loaded, setLoaded] = useState(false);
+  const [problemInfo, setProblemInfo] = useState({
+    id: "",
+    title: "",
+    options: "",
+    type: "",
+  });
 
-export default class ExamPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: Math.floor(Math.random() * 12),
-      status: false,
-    };
-  }
-
-  handleClick = () => {
-    this.setState({
-      value: Math.floor(Math.random() * 12),
-      status: false,
-    });
+  const refresh = async () => {
+    const res = await getProblemInfo();
+    if (res.code === 2000) {
+      setProblemInfo(res.data.problemList);
+      setLoaded(true);
+    }
   };
 
-  render() {
+  useEffect(() => {
+    refresh();
+  }, []);
+
+  if (!loaded) return <View></View>;
+
+  const Option = () => {
+    let str = problemInfo[1].options;
+    let res = str.split(",");
     return (
-      <ScrollView style={{ backgroundColor: "#eef1f2" }}>
-        <Flex justify="center">
-          <ImageBackground
-            style={styles.blue}
-            source={require("../../assets/imgs/blue.png")}
-          >
-            <Flex justify="center" direction="column">
-              {/* // 上半部分 */}
-              <View style={styles.squareUp}>
-                <List>
-                  <Item>题目</Item>
-                </List>
-                <Text style={styles.title}>{msg[this.state.value].title}</Text>
-              </View>
-              {/* // 下半部分 */}
-              <View style={styles.squareDown}>
-                <List>
-                  <Item>选项</Item>
-                  <Item
-                    style={styles.ans}
-                    thumb={
-                      <Checkbox key={Math.random()} defaultChecked={this.state.status}>
-                        A:{msg[this.state.value].A}
-                      </Checkbox>
-                    }
-                  />
-                  <Item
-                    style={styles.ans}
-                    thumb={
-                      <Checkbox key={Math.random()} defaultChecked={this.state.status}>
-                        B:{msg[this.state.value].B}
-                      </Checkbox>
-                    }
-                  />
-                  <Item
-                    style={styles.ans}
-                    thumb={
-                      <Checkbox key={Math.random()} defaultChecked={this.state.status}>
-                        C:{msg[this.state.value].C}
-                      </Checkbox>
-                    }
-                  />
-                  <Item
-                    style={styles.ans}
-                    thumb={
-                    <Checkbox key={Math.random()} defaultChecked={this.state.status}>
-                        D:{msg[this.state.value].D}
-                      </Checkbox>
-                    }
-                  />
-                </List>
-              </View>
-              <Button style={styles.button} onPress={this.handleClick}>
-                确认
-              </Button>
-            </Flex>
-          </ImageBackground>
-        </Flex>
-      </ScrollView>
-    );
-  }
+      <List styles={styles.ans}>
+        {res.map((resData) => (
+          <Item styles={styles.ans} thumb={<Checkbox styles={styles.ans}>{resData}</Checkbox>}>
+          </Item>
+          ))}
+    </List>
+    )
+  };
+
+  return (
+    <ScrollView style={{ backgroundColor: "#eef1f2" }}>
+      <Flex justify="center">
+        <ImageBackground
+          style={styles.blue}
+          source={require("@/assets/imgs/blue.png")}
+        >
+          <Flex justify="center" direction="column">
+            {/* // 上半部分 */}
+            <View style={styles.squareUp}>
+              <List>
+                <Item>题目</Item>
+              </List>
+              <Text style={styles.title}>{problemInfo[0].title}</Text>
+            </View>
+            {/* // 下半部分 */}
+            <View style={styles.squareDown}>
+              <List>
+                <Item>选项</Item>
+              </List>
+              <Option />
+            </View>
+            <Button style={styles.button}>确认</Button>
+          </Flex>
+        </ImageBackground>
+      </Flex>
+    </ScrollView>
+  );
 }
+
+export default ExamPage;

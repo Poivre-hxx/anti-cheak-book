@@ -2,7 +2,7 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import CoverPage from "./src/pages/cover/coverPage";
+import CoverPage from "./src/pages/cover/CoverPage";
 import LoginPage from "./src/pages/login/loginPage";
 import RegisterPage from "@/pages/register/register";
 import HomePage from "./src/pages/home/homePage";
