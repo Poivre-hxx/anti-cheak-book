@@ -23,15 +23,17 @@ function HomePage({ navigation }) {
     sex: 0,
   });
 
+  const refresh = async () => {
+    const res = await getUserInfo();
+    if (res.code === 2000) {
+      setUserInfo(res.data.user);
+      setLoaded(true);
+    }
+    // @todo 错误处理
+  };
+
   useEffect(() => {
-    (async () => {
-      const res = await getUserInfo();
-      if (res.code === 2000) {
-        setUserInfo(res.data.user);
-        setLoaded(true);
-      }
-      // @todo 错误处理
-    })();
+    refresh();
   }, []);
 
   if (!loaded) return <View></View>;
@@ -43,7 +45,12 @@ function HomePage({ navigation }) {
           <Button
             type="primary"
             style={styles.head}
-            onPress={() => navigation.navigate("Profile", { userInfo })}
+            onPress={() =>
+              navigation.navigate("Profile", {
+                data: userInfo,
+                callback: refresh,
+              })
+            }
           >
             <Image
               source={

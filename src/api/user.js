@@ -5,5 +5,5 @@ export const getUserInfo = async () => {
 };
 
 export const updateUserInfo = async userInfo => {
-  return await request.post("/user", userInfo);
+  return await request.post("/user/update", userInfo);
 };
