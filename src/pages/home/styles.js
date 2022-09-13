@@ -1,0 +1,86 @@
+import { StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  head: {
+    backgroundColor: "#3851B2",
+    height: 80,
+    width: 80,
+    borderRadius: 50,
+    marginBottom: -135,
+    marginTop: 50,
+    zIndex: 1,
+  },
+  photo: {
+    height: 80,
+    width: 80,
+    borderRadius: 50,
+    marginBottom: 0,
+    marginTop: 50,
+    marginRight: 10,
+  },
+  Start: {
+    marginTop: 20,
+    borderRadius: 9,
+    backgroundColor: "#F97163",
+    margin: 4,
+    width: 156,
+    height: 171,
+    marginRight: 15,
+    marginBottom: 200,
+  },
+  Review: {
+    marginTop: 20,
+    borderRadius: 9,
+    backgroundColor: "#3851B2",
+    margin: 4,
+    width: 156,
+    height: 171,
+    marginLeft: 15,
+    marginBottom: 200,
+  },
+  SquareUP: {
+    backgroundColor: "#fff",
+    borderRadius: 15,
+    width: 306,
+    height: 174,
+    margin: 1,
+    marginTop: 100,
+  },
+  Square2: {
+    marginTop: 20,
+    borderRadius: 10,
+    backgroundColor: "#AFBDF1",
+    margin: 1,
+    width: 108,
+    height: 40,
+    marginLeft: 30,
+  },
+  Square3: {
+    marginTop: 20,
+    borderRadius: 9,
+    backgroundColor: "#FFF",
+    margin: 4,
+    width: 108,
+    height: 108,
+  },
+  Line: {
+    marginTop: 20,
+    borderRadius: 9,
+    backgroundColor: "#707070",
+    margin: 4,
+    width: 234,
+    height: 1,
+    marginLeft: 30,
+  },
+  nickName: {
+    fontSize: 18,
+    fontWeight: "bold",
+    paddingTop: 50,
+  },
+  username: {
+    color: "#566471",
+    paddingBottom: 20,
+  },
+});
+
+export default styles;

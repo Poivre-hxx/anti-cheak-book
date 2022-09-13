@@ -1,98 +1,48 @@
-import { View, ScrollView, StyleSheet, Image } from "react-native";
-import { Button, Flex, Provider, Toast } from "@ant-design/react-native";
+import { View, ScrollView, Image } from "react-native";
+import {
+  Button,
+  Flex,
+  Provider,
+  Toast,
+  Text,
+  WhiteSpace,
+} from "@ant-design/react-native";
 import Storage from "@/utils/storage";
-
-const SquareUP = props => {
-  const style = {
-    backgroundColor: "#fff",
-    borderRadius: 15,
-    width: 306,
-    height: 174,
-    margin: 1,
-    marginTop: 100,
-  };
-  return <View style={style}></View>;
-};
-
-const Square2 = props => {
-  const style = {
-    marginTop: 20,
-    borderRadius: 10,
-    backgroundColor: "#AFBDF1",
-    margin: 1,
-    width: 108,
-    height: 40,
-    marginLeft: 30,
-  };
-  return <View style={style}></View>;
-};
-
-const Square3 = props => {
-  const style = {
-    marginTop: 20,
-    borderRadius: 9,
-    backgroundColor: "#FFF",
-    margin: 4,
-    width: 108,
-    height: 108,
-  };
-  return <View style={style}></View>;
-};
-
-const Line = props => {
-  const style = {
-    marginTop: 20,
-    borderRadius: 9,
-    backgroundColor: "#707070",
-    margin: 4,
-    width: 234,
-    height: 1,
-    marginLeft: 30,
-  };
-  return <View style={style}></View>;
-};
-
-const styles = StyleSheet.create({
-  head: {
-    backgroundColor: "#3851B2",
-    height: 80,
-    width: 80,
-    borderRadius: 50,
-    marginBottom: -135,
-    marginTop: 50,
-    zIndex: 1,
-  },
-  photo: {
-    height: 80,
-    width: 80,
-    borderRadius: 50,
-    marginBottom: 0,
-    marginTop: 50,
-    marginRight: 10,
-  },
-  Start: {
-    marginTop: 20,
-    borderRadius: 9,
-    backgroundColor: "#F97163",
-    margin: 4,
-    width: 156,
-    height: 171,
-    marginRight: 15,
-    marginBottom: 200,
-  },
-  Review: {
-    marginTop: 20,
-    borderRadius: 9,
-    backgroundColor: "#3851B2",
-    margin: 4,
-    width: 156,
-    height: 171,
-    marginLeft: 15,
-    marginBottom: 200,
-  },
-});
+import { useEffect, useState } from "react";
+import { getUserInfo } from "@/api/user";
+import styles from "./styles";
 
 function HomePage({ navigation }) {
+  const [loaded, setLoaded] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    username: "",
+    nickName: "",
+    avatar: {
+      url: "",
+    },
+    birthday: "",
+    sex: 0,
+  });
+
+  useEffect(() => {
+    (async () => {
+      const res = await getUserInfo();
+      if (res.code === 2000) {
+        setUserInfo({
+          username: res.data.user.username,
+          nickName: res.data.user.nickName,
+          avatar: {
+            url: res.data.user.avatar,
+          },
+          birthday: res.data.user.birthday,
+          sex: res.data.user.sex,
+        });
+        setLoaded(true);
+      }
+      // @todo 错误处理
+    })();
+  }, []);
+
   const logOut = async () => {
     Toast.success("退出成功！", 1);
     await Storage.remove("token");
@@ -100,6 +50,7 @@ function HomePage({ navigation }) {
       navigation.navigate("Cover");
     }, 1000);
   };
+  if (!loaded) return <ScrollView></ScrollView>;
 
   return (
     <Provider>
@@ -111,19 +62,29 @@ function HomePage({ navigation }) {
             onPress={() => navigation.navigate("Profile")}
           >
             <Image
-              source={require("../../assets/imgs/avatar.png")}
+              source={
+                userInfo.avatar || require("../../assets/imgs/avatar.png")
+              }
               style={styles.photo}
             ></Image>
           </Button>
-          <SquareUP />
+          <View style={styles.SquareUP}>
+            <Flex Flex justify="center" direction="col">
+              <Text style={styles.nickName}>
+                {userInfo.nickName || `DefaultUser${userInfo.username}`}
+              </Text>
+              <Text style={styles.username}>@{userInfo.username}</Text>
+              <Text>最高记录：100{}分</Text>
+            </Flex>
+          </View>
         </Flex>
-        <Square2 />
+        <View style={styles.Square2}></View>
         <Flex justify="center" direction="row">
-          <Square3 />
-          <Square3 />
-          <Square3 />
+          <View style={styles.Square3}></View>
+          <View style={styles.Square3}></View>
+          <View style={styles.Square3}></View>
         </Flex>
-        <Line />
+        <View style={styles.Line}></View>
         <Flex justify="center" direction="row">
           <Button
             type="primary"
