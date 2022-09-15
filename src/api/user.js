@@ -11,3 +11,6 @@ export const updateUserInfo = async userInfo => {
 export const getProblemInfo = async () => {
   return await request.get("/problem?num=20");
 }
+export const updateSubmitInfo = async submitInfo => {
+  return await request.post("/problem", submitInfo);
+}

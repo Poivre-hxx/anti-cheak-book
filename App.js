@@ -8,6 +8,7 @@ import RegisterPage from "@/pages/register/register";
 import HomePage from "./src/pages/home/homePage";
 import ExamPage from "./src/pages/exam/examPage";
 import ProfilePage from "./src/pages/profile/profilePage";
+import SettlePage from "@/pages/settle/settlePage";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const App = () => {
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="Exam" component={ExamPage} />
         <Stack.Screen name="Profile" component={ProfilePage} />
+        <Stack.Screen name="Settle" component={SettlePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

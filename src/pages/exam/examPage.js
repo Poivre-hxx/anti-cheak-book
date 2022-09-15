@@ -3,8 +3,11 @@ import { View, ScrollView, ImageBackground } from "react-native";
 import { List, Flex, Text, Checkbox, Button } from "@ant-design/react-native";
 import { getProblemInfo } from "@/api/user";
 import styles from "./styles";
+import { updateSubmitInfo } from "@/api/user";
 
 const Item = List.Item;
+let ans = [];
+const answers = [];
 
 function ExamPage({ navigation }) {
   const [loaded, setLoaded] = useState(false);
@@ -14,6 +17,8 @@ function ExamPage({ navigation }) {
     options: "",
     type: "",
   });
+
+  const [num, setNum] = useState(0);
 
   const refresh = async () => {
     const res = await getProblemInfo();
@@ -29,17 +34,79 @@ function ExamPage({ navigation }) {
 
   if (!loaded) return <View></View>;
 
+  const Title = () => {
+    const id = num;
+    return <Text style={styles.title}>{problemInfo[id].title}</Text>;
+  };
+
   const Option = () => {
-    let str = problemInfo[1].options;
+    const id = num;
+    let str = problemInfo[id].options;
     let res = str.split(",");
     return (
       <List styles={styles.ans}>
-        {res.map((resData) => (
-          <Item styles={styles.ans} thumb={<Checkbox styles={styles.ans}>{resData}</Checkbox>}>
-          </Item>
-          ))}
-    </List>
-    )
+        {res.map((resData, index) => (
+          <Item
+            styles={styles.ans}
+            thumb={
+              <Checkbox
+                key={index + 1}
+                styles={styles.ans}
+                onChange={(e) => {
+                  if (e.target.checked === true) {
+                    ans.push(index + 1);
+                  } else {
+                    ans.splice(
+                      ans.findIndex((item) => item === index + 1),
+                      1
+                    );
+                  }
+                }}
+              >
+                {resData}
+              </Checkbox>
+            }
+          ></Item>
+        ))}
+      </List>
+    );
+  };
+
+  const HandleClick = () => {
+    answers.push({
+      id: problemInfo[num].id,
+      answer: ans,
+    })
+    ans = [];
+    setNum((state) => state + 1);
+  };
+
+  const SubmitAnswers = async () => {
+    const res = await updateSubmitInfo(answers);
+    // if (res.code === 2000) {
+      navigation.navigate("Settle");
+    // }
+  }
+
+  const Check = () => {
+    if (num < 15) {
+      return (
+        <View>
+          <Button style={styles.button} onPress={() => HandleClick()}>
+            确认
+          </Button>
+        </View>
+      );
+    } else {
+      return (
+        <Button
+          style={styles.button}
+          onPress={() => SubmitAnswers()}
+        >
+          确认
+        </Button>
+      );
+    }
   };
 
   return (
@@ -55,7 +122,7 @@ function ExamPage({ navigation }) {
               <List>
                 <Item>题目</Item>
               </List>
-              <Text style={styles.title}>{problemInfo[0].title}</Text>
+              <Title />
             </View>
             {/* // 下半部分 */}
             <View style={styles.squareDown}>
@@ -64,7 +131,7 @@ function ExamPage({ navigation }) {
               </List>
               <Option />
             </View>
-            <Button style={styles.button}>确认</Button>
+            <Check />
           </Flex>
         </ImageBackground>
       </Flex>
