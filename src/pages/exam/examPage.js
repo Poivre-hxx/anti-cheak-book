@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { View, ScrollView, ImageBackground } from "react-native";
 import { List, Flex, Text, Checkbox, Button } from "@ant-design/react-native";
-import { getProblemInfo } from "@/api/user";
+import { getProblemInfo } from "@/api/problem";
 import styles from "./styles";
 import { updateSubmitInfo } from "@/api/user";
 
@@ -52,12 +52,12 @@ function ExamPage({ navigation }) {
               <Checkbox
                 key={index + 1}
                 styles={styles.ans}
-                onChange={(e) => {
+                onChange={e => {
                   if (e.target.checked === true) {
                     ans.push(index + 1);
                   } else {
                     ans.splice(
-                      ans.findIndex((item) => item === index + 1),
+                      ans.findIndex(item => item === index + 1),
                       1
                     );
                   }
@@ -76,17 +76,17 @@ function ExamPage({ navigation }) {
     answers.push({
       id: problemInfo[num].id,
       answer: ans,
-    })
+    });
     ans = [];
-    setNum((state) => state + 1);
+    setNum(state => state + 1);
   };
 
   const SubmitAnswers = async () => {
     const res = await updateSubmitInfo(answers);
     // if (res.code === 2000) {
-      navigation.navigate("Settle");
+    navigation.navigate("Settle");
     // }
-  }
+  };
 
   const Check = () => {
     if (num < 15) {
@@ -99,10 +99,7 @@ function ExamPage({ navigation }) {
       );
     } else {
       return (
-        <Button
-          style={styles.button}
-          onPress={() => SubmitAnswers()}
-        >
+        <Button style={styles.button} onPress={() => SubmitAnswers()}>
           确认
         </Button>
       );

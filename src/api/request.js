@@ -1,5 +1,5 @@
 import axios from "axios";
-import Storage from "../utils/storage";
+import Storage from "@/utils/storage";
 
 const baseURL = "https://anti-cheat-book-api.xav1er.com";
 

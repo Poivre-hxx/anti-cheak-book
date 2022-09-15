@@ -19,10 +19,8 @@ const Item = List.Item;
 
 const { height: ScreenHeight } = Dimensions.get("screen");
 
-const ProfilePage = ({ navigation }) => {
-  const { data, callback } = navigation
-    .getState()
-    .routes.find(route => route.name === "Profile")?.params;
+const ProfilePage = ({ navigation, route }) => {
+  const { data, callback } = route.params;
 
   const gender = [
     { value: 0, label: "请选择" },

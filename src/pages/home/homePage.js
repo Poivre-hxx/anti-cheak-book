@@ -15,13 +15,7 @@ const { width: ScreenWidth } = Dimensions.get("screen");
 
 function HomePage({ navigation }) {
   const [loaded, setLoaded] = useState(false);
-  const [userInfo, setUserInfo] = useState({
-    username: "",
-    nickname: "",
-    avatar: "",
-    birthday: "",
-    sex: 0,
-  });
+  const [userInfo, setUserInfo] = useState({});
 
   const refresh = async () => {
     const res = await getUserInfo();
@@ -75,7 +69,7 @@ function HomePage({ navigation }) {
                 </Text>
                 <Text style={styles.username}>@{userInfo.username}</Text>
                 {/* <View style={styles.line}></View> */}
-                <Text>最高记录：100{}分</Text>
+                <Text>最高记录：{userInfo.maxScore}分</Text>
               </Flex>
             </ImageBackground>
           </View>

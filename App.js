@@ -2,12 +2,12 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import CoverPage from "./src/pages/cover/CoverPage";
-import LoginPage from "./src/pages/login/loginPage";
+import CoverPage from "@/pages/cover/coverPage";
+import LoginPage from "@/pages/login/loginPage";
 import RegisterPage from "@/pages/register/register";
-import HomePage from "./src/pages/home/homePage";
-import ExamPage from "./src/pages/exam/examPage";
-import ProfilePage from "./src/pages/profile/profilePage";
+import HomePage from "@/pages/home/homePage";
+import ExamPage from "@/pages/exam/examPage";
+import ProfilePage from "@/pages/profile/profilePage";
 import SettlePage from "@/pages/settle/settlePage";
 
 const Stack = createNativeStackNavigator();
@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="反诈宝典">
+      <Stack.Navigator initialRouteName="Cover">
         <Stack.Screen name="Cover" component={CoverPage} />
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Register" component={RegisterPage} />
