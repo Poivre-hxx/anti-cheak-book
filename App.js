@@ -9,6 +9,8 @@ import HomePage from "@/pages/home/homePage";
 import ExamPage from "@/pages/exam/examPage";
 import ProfilePage from "@/pages/profile/profilePage";
 import SettlePage from "@/pages/settle/settlePage";
+import History from "@/pages/history";
+import Mistakes from "@/pages/mistakes";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,8 @@ const App = () => {
         <Stack.Screen name="Register" component={RegisterPage} />
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="Exam" component={ExamPage} />
+        <Stack.Screen name="History" component={History} />
+        <Stack.Screen name="Mistakes" component={Mistakes} />
         <Stack.Screen name="Profile" component={ProfilePage} />
         <Stack.Screen name="Settle" component={SettlePage} />
       </Stack.Navigator>

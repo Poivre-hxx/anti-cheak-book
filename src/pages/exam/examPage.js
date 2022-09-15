@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { View, ScrollView, ImageBackground } from "react-native";
 import { List, Flex, Text, Checkbox, Button } from "@ant-design/react-native";
-import { getProblemInfo } from "@/api/problem";
+import { getProblemInfo, updateSubmitInfo } from "@/api/problem";
 import styles from "./styles";
-import { updateSubmitInfo } from "@/api/user";
 
 const Item = List.Item;
 let ans = [];
@@ -47,6 +46,7 @@ function ExamPage({ navigation }) {
       <List styles={styles.ans}>
         {res.map((resData, index) => (
           <Item
+            key={index}
             styles={styles.ans}
             thumb={
               <Checkbox

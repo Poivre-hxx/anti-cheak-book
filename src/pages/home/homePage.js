@@ -98,7 +98,12 @@ function HomePage({ navigation }) {
           >
             <Text style={styles.start_text}>开始</Text>
           </Button>
-          <Button style={styles.review}>
+          <Button
+            style={styles.review}
+            onPress={() => {
+              navigation.navigate("History");
+            }}
+          >
             <Text style={styles.start_text}>错题查看</Text>
           </Button>
         </Flex>

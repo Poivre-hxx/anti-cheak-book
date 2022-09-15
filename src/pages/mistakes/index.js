@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { View, ScrollView, ImageBackground } from "react-native";
-import { Flex } from "@ant-design/react-native";
+import { List, Flex, Text, Checkbox, Button } from "@ant-design/react-native";
 import { getPaper } from "@/api/problem";
 import styles from "./styles";
 
+const Item = List.Item;
+
 const Mistakes = ({ route }) => {
   const { data } = route.params;
-  const paper = data.paper.split(",");
+  const paper = data.split(",");
+  paper.forEach((id, index) => {
+    paper[index] = parseInt(id);
+  });
 
   const [loaded, setLoaded] = useState(false);
   const [problemList, setProblemList] = useState([]);
@@ -17,6 +22,7 @@ const Mistakes = ({ route }) => {
   };
 
   useEffect(() => {
+    console.log(paper);
     getPaper(paper).then(res => {
       if (res.code === 2000) {
         setProblemList(res.data.problemList);
@@ -25,7 +31,7 @@ const Mistakes = ({ route }) => {
     });
   }, []);
 
-  if (!loaded) return <View></View>;
+  if (!loaded) return;
 
   return (
     <ScrollView style={{ backgroundColor: "#eef1f2" }}>

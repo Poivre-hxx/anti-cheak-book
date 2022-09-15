@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { View, ScrollView, ImageBackground } from "react-native";
-import { List, Flex, Text, Checkbox, Button } from "@ant-design/react-native";
-import { getProblemInfo } from "@/api/user";
+import { List, Flex } from "@ant-design/react-native";
+import { getProblemInfo } from "@/api/problem";
 import styles from "./styles";
 
 const Item = List.Item;
@@ -31,8 +31,7 @@ function SettlePage({ navigation }) {
 
   const Check = () => {
     if (num < 20) {
-      setNum((state) => state + 1);
-
+      setNum(state => state + 1);
     } else {
       () => navigation.navigate("Settle");
     }
