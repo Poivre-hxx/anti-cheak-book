@@ -3,26 +3,53 @@ import { View, ScrollView, ImageBackground } from "react-native";
 import { List, Flex, Text, Checkbox, Button } from "@ant-design/react-native";
 import { getPaper } from "@/api/problem";
 import styles from "./styles";
-
+import { difference } from "@/utils/lodash";
 const Item = List.Item;
 
 const Mistakes = ({ route }) => {
   const { data } = route.params;
-  const paper = data.split(",");
-  paper.forEach((id, index) => {
-    paper[index] = parseInt(id);
+  const paper = data.paper.split(",").map(el => parseInt(el));
+  const mistakesMap = new Map();
+  data.mistakes.forEach(mistake => {
+    mistakesMap.set(
+      mistake.id,
+      mistake.myAnswer.split(",").map(el => parseInt(el))
+    );
   });
-
   const [loaded, setLoaded] = useState(false);
   const [problemList, setProblemList] = useState([]);
   const [index, setIndex] = useState(0);
 
-  const handleNext = () => {
-    setIndex(index + 1);
-  };
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    console.log(paper);
+    if (problemList.length === 0) return;
+    const problem = problemList[index];
+    const correctAnswers = problem.answer.split(",").map(el => parseInt(el));
+    const myAnswers = mistakesMap.get(problem.id);
+    let overSelected, missingSelected;
+    if (myAnswers) {
+      overSelected = difference(myAnswers, correctAnswers);
+      missingSelected = difference(correctAnswers, myAnswers);
+    }
+    const res = problem.options.split(",").map((optionText, _index) => {
+      const isCorrect = correctAnswers.indexOf(_index + 1) !== -1;
+      const selected = myAnswers?.indexOf(_index + 1) !== -1;
+      const isWrong = myAnswers
+        ? overSelected.indexOf(_index + 1) !== -1 ||
+          missingSelected.indexOf(_index + 1) !== -1
+        : false;
+      return {
+        optionText,
+        isCorrect,
+        selected,
+        isWrong,
+      };
+    });
+    setOptions(res);
+  }, [problemList, index]);
+
+  useEffect(() => {
     getPaper(paper).then(res => {
       if (res.code === 2000) {
         setProblemList(res.data.problemList);
@@ -53,18 +80,53 @@ const Mistakes = ({ route }) => {
               <List>
                 <Item>选项</Item>
               </List>
-              <List styles={styles.ans}>
-                {problemList[index].options.split(",").map(option => (
-                  <Item
-                    styles={styles.ans}
-                    thumb={<Checkbox styles={styles.ans}>{option}</Checkbox>}
-                  ></Item>
-                ))}
-              </List>
+              <Flex direction="column" align="center" justify="center">
+                {options.map((option, _index) => {
+                  return (
+                    <View
+                      key={_index}
+                      style={{
+                        ...styles.ans,
+                        backgroundColor: option.isWrong ? "red" : "white",
+                      }}
+                    >
+                      <Checkbox checked={option.isCorrect || option.selected}>
+                        <Text
+                          style={{
+                            fontSize: 16,
+                            color: option.isWrong ? "white" : "black",
+                          }}
+                        >
+                          {option.optionText}
+                        </Text>
+                      </Checkbox>
+                    </View>
+                  );
+                })}
+              </Flex>
+              <Flex justify="between">
+                {index !== 0 ? (
+                  <Button
+                    style={styles.button}
+                    onPress={() => setIndex(index - 1)}
+                  >
+                    上一题
+                  </Button>
+                ) : (
+                  <View></View>
+                )}
+                {index !== problemList.length - 1 ? (
+                  <Button
+                    style={styles.button}
+                    onPress={() => setIndex(index + 1)}
+                  >
+                    下一题
+                  </Button>
+                ) : (
+                  <View></View>
+                )}
+              </Flex>
             </View>
-            {index === problemList.length - 1 ? (
-              <Button style={styles.button} onPress={handleNext} />
-            ) : null}
           </Flex>
         </ImageBackground>
       </Flex>

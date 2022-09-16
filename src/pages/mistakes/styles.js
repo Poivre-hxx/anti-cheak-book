@@ -14,8 +14,7 @@ const styles = StyleSheet.create({
     width: 308,
     height: 300,
     marginTop: 50,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal: 10,
   },
   title: {
     margin: 5,
@@ -28,15 +27,13 @@ const styles = StyleSheet.create({
     marginBottom: 1000,
   },
   ans: {
-    width: 160,
-    margin: 5,
-    fontsize: 15
+    width: 308,
+    padding: 10,
   },
   button: {
     width: 120,
     height: 40,
-    marginTop: -55,
-    marginLeft: 150,
+    margin: 10,
   },
 });
 

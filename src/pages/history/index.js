@@ -26,7 +26,12 @@ const History = ({ navigation }) => {
             <Text>{exam.score}分</Text>
             <Button
               onPress={() => {
-                navigation.navigate("Mistakes", { data: exam.paper });
+                navigation.navigate("Mistakes", {
+                  data: {
+                    paper: exam.paper,
+                    mistakes: exam.mistakes,
+                  },
+                });
               }}
             ></Button>
           </View>
