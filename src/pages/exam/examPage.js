@@ -73,9 +73,16 @@ function ExamPage({ navigation }) {
   };
 
   const HandleClick = () => {
+    let sub = "";
+    let i = 0;
+    for (i = 0; i < ans.length - 1; i++) {
+      sub += ans[i];
+      sub += ","
+    }
+    sub += ans[i];
     answers.push({
       id: problemInfo[num].id,
-      answer: ans,
+      answer: sub,
     });
     ans = [];
     setNum(state => state + 1);
