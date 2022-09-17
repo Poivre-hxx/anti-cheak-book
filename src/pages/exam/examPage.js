@@ -76,6 +76,15 @@ function ExamPage({ navigation }) {
     let sub = "";
     let i = 0;
     for (i = 0; i < ans.length - 1; i++) {
+      for (let j = 0; j < ans.length - 1; j++) {
+        if (ans[j] > arr[j + 1]) {
+          const temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    for (i = 0; i < ans.length - 1; i++) {
       sub += ans[i];
       sub += ","
     }
