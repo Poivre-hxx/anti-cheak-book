@@ -28,12 +28,15 @@ npm install --global expo-cli
 
 
 
-##  Quick Start
+## Quick Start
 
 ```bash
 Expo start
 ```
-
+## Quick Packing
+```bash
+eas build -p android --profile preview
+```
 
 
 ## Description
