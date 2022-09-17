@@ -37,13 +37,13 @@ const History = ({ navigation }) => {
                   width: 60,
                   height: 60,
                   backgroundColor: "#74D78F",
-                  borderRadius: "50%",
+                  borderRadius: 50,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                 }}
               >
-                <Text style={{ fontSize: 20, color: "white" }}>
+                <Text style={{ fontSize: 17, color: "white" }}>
                   {exam.score}分
                 </Text>
               </View>

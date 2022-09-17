@@ -4,6 +4,7 @@ import {
   Image,
   Dimensions,
   ImageBackground,
+  TouchableHighlight,
 } from "react-native";
 import { Button, Flex, Provider, Text } from "@ant-design/react-native";
 import { useEffect, useState } from "react";
@@ -30,14 +31,13 @@ function HomePage({ navigation }) {
     refresh();
   }, []);
 
-  if (!loaded) return <View></View>;
+  if (!loaded) return;
 
   return (
     <Provider>
       <ScrollView style={styles.main}>
         <Flex justify="center" direction="column">
-          <Button
-            type="primary"
+          <TouchableHighlight
             style={styles.head}
             onPress={() =>
               navigation.navigate("Profile", {
@@ -48,11 +48,14 @@ function HomePage({ navigation }) {
           >
             <Image
               source={
-                { url: userInfo.avatar } || require("@/assets/imgs/avatar.png")
+                userInfo.avatar
+                  ? { uri: userInfo.avatar }
+                  : require("@/assets/imgs/avatar.png")
               }
               style={styles.photo}
-            ></Image>
-          </Button>
+            />
+          </TouchableHighlight>
+
           <View style={{ position: "relative" }}>
             <ImageBackground
               source={require("@/assets/home/info.png")}
@@ -61,14 +64,13 @@ function HomePage({ navigation }) {
               <Flex
                 Flex
                 justify="center"
-                direction="col"
+                direction="column"
                 style={styles.info_text}
               >
                 <Text style={styles.nickname}>
-                  {userInfo.nickname || `DefaultUser${userInfo.username}`}
+                  {userInfo.nickname ?? `DefaultUser${userInfo.username}`}
                 </Text>
                 <Text style={styles.username}>@{userInfo.username}</Text>
-                {/* <View style={styles.line}></View> */}
                 <Text>最高记录：{userInfo.maxScore}分</Text>
               </Flex>
             </ImageBackground>
@@ -81,15 +83,15 @@ function HomePage({ navigation }) {
           <ImageBackground
             style={styles.category}
             source={require("@/assets/home/category.png")}
-          ></ImageBackground>
+          />
           <ImageBackground
             style={styles.category}
             source={require("@/assets/home/category.png")}
-          ></ImageBackground>
+          />
           <ImageBackground
             style={styles.category}
             source={require("@/assets/home/category.png")}
-          ></ImageBackground>
+          />
         </Flex>
         <Flex justify="center" direction="row">
           <Button
