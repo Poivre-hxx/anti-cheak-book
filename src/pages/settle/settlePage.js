@@ -1,12 +1,36 @@
 import { useEffect, useState } from "react";
-import { View, ScrollView, ImageBackground } from "react-native";
-import { List, Flex } from "@ant-design/react-native";
-import { getProblemInfo } from "@/api/problem";
+import { View, ScrollView, ImageBackground, Text } from "react-native";
+import {
+  List,
+  Flex,
+  ActivityIndicator,
+  Button,
+} from "@ant-design/react-native";
+import { submitAnswers } from "@/api/problem";
 import styles from "./styles";
 
 const Item = List.Item;
 
-function SettlePage({ navigation }) {
+function SettlePage({ navigation, route }) {
+  const { type, result } = route.params;
+  const [loaded, setLoaded] = useState(false);
+  const [info, setInfo] = useState({});
+
+  const handlePress = () => {
+    navigation.navigate("Mistakes", {
+      data: info,
+    });
+  };
+
+  useEffect(() => {
+    submitAnswers(type, result).then(res => {
+      if (res.code === 2000) {
+        setInfo(res.data);
+        setTimeout(() => setLoaded(true), 1000);
+      }
+    });
+  }, []);
+
   return (
     <ScrollView style={{ backgroundColor: "#eef1f2" }}>
       <Flex justify="center">
@@ -16,11 +40,27 @@ function SettlePage({ navigation }) {
         >
           <Flex justify="center" direction="column">
             {/* // 上半部分 */}
-            <View style={styles.squareUp}>
-              <List>
-                <Item>结束</Item>
-              </List>
-            </View>
+            <List style={styles.squareUp}>
+              <Item>{!loaded ? "正在计算" : "考试结束"}</Item>
+              <Item>
+                {!loaded ? (
+                  <ActivityIndicator text="正在加载" />
+                ) : (
+                  <View>
+                    <Text style={{ textAlign: "center" }}>
+                      您的得分是：{info.score}
+                    </Text>
+                    <Button
+                      type="primary"
+                      style={{ marginVertical: 20, marginHorizontal: 10 }}
+                      onPress={handlePress}
+                    >
+                      查看错题
+                    </Button>
+                  </View>
+                )}
+              </Item>
+            </List>
           </Flex>
         </ImageBackground>
       </Flex>

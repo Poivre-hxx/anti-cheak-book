@@ -11,6 +11,7 @@ import ProfilePage from "@/pages/profile/profilePage";
 import SettlePage from "@/pages/settle/settlePage";
 import History from "@/pages/history";
 import Mistakes from "@/pages/mistakes";
+import VisitorPage from "@/pages/visitor";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ const App = () => {
         <Stack.Screen name="Mistakes" component={Mistakes} />
         <Stack.Screen name="Profile" component={ProfilePage} />
         <Stack.Screen name="Settle" component={SettlePage} />
+        <Stack.Screen name="Visitor" component={VisitorPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

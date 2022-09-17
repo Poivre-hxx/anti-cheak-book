@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { View, ScrollView, ImageBackground } from "react-native";
-import { List, Flex, Text, Checkbox, Button } from "@ant-design/react-native";
+import {
+  List,
+  Flex,
+  Text,
+  Checkbox,
+  Button,
+  ActivityIndicator,
+} from "@ant-design/react-native";
 import { getPaper } from "@/api/problem";
 import styles from "./styles";
 import { difference } from "@/utils/lodash";
@@ -27,21 +34,28 @@ const Mistakes = ({ route }) => {
     const problem = problemList[index];
     const correctAnswers = problem.answer.split(",").map(el => parseInt(el));
     const myAnswers = mistakesMap.get(problem.id);
-    let overSelected, missingSelected;
-    if (myAnswers) {
-      overSelected = difference(myAnswers, correctAnswers);
-      missingSelected = difference(correctAnswers, myAnswers);
+
+    if (!myAnswers) {
+      // 说明这道题做对了
+      const res = problem.options.split(",").map((optionText, _index) => ({
+        optionText,
+        selected: correctAnswers.includes(_index + 1),
+        isWrong: false,
+      }));
+      setOptions(res);
+      return;
     }
+    const overSelected = difference(myAnswers, correctAnswers);
+    const missingSelected = difference(correctAnswers, myAnswers);
+    const mistakes = overSelected.concat(missingSelected);
     const res = problem.options.split(",").map((optionText, _index) => {
-      const isCorrect = correctAnswers.indexOf(_index + 1) !== -1;
+      // 已选
       const selected = myAnswers?.indexOf(_index + 1) !== -1;
-      const isWrong = myAnswers
-        ? overSelected.indexOf(_index + 1) !== -1 ||
-          missingSelected.indexOf(_index + 1) !== -1
-        : false;
+      // 判断对错
+      const isWrong = mistakes.includes(_index + 1);
+
       return {
         optionText,
-        isCorrect,
         selected,
         isWrong,
       };
@@ -58,7 +72,12 @@ const Mistakes = ({ route }) => {
     });
   }, []);
 
-  if (!loaded) return;
+  if (!loaded)
+    return (
+      <View style={{ position: "absolute", top: "50%", left: "50%" }}>
+        <ActivityIndicator />
+      </View>
+    );
 
   return (
     <ScrollView style={{ backgroundColor: "#eef1f2" }}>
@@ -78,7 +97,17 @@ const Mistakes = ({ route }) => {
             {/* // 下半部分 */}
             <View style={styles.squareDown}>
               <List>
-                <Item>选项</Item>
+                <Item
+                  extra={
+                    <View>
+                      <Text>
+                        第{index + 1}题/共{problemList.length}题
+                      </Text>
+                    </View>
+                  }
+                >
+                  选项
+                </Item>
               </List>
               <Flex direction="column" align="center" justify="center">
                 {options.map((option, _index) => {
@@ -90,7 +119,7 @@ const Mistakes = ({ route }) => {
                         backgroundColor: option.isWrong ? "red" : "white",
                       }}
                     >
-                      <Checkbox checked={option.isCorrect || option.selected}>
+                      <Checkbox checked={option.selected}>
                         <Text
                           style={{
                             fontSize: 16,

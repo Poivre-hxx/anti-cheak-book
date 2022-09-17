@@ -129,7 +129,7 @@ function CoverPage({ navigation }) {
               <Button
                 type="primary"
                 style={styles.button}
-                onPress={() => navigation.navigate("Home")}
+                onPress={() => navigation.navigate("Visitor")}
               >
                 游客进入
               </Button>

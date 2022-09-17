@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
   },
   squareDown: {
     borderRadius: 15,
-    backgroundColor: "#fff",
     width: 308,
     height: 300,
     marginTop: 50,
@@ -28,15 +27,12 @@ const styles = StyleSheet.create({
     marginBottom: 1000,
   },
   ans: {
-    width: 160,
     margin: 5,
-    fontsize: 15
+    fontsize: 15,
   },
   button: {
     width: 120,
     height: 40,
-    marginTop: -55,
-    marginLeft: 150,
   },
 });
 

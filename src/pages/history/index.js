@@ -3,6 +3,8 @@ import { List, Text, View } from "@ant-design/react-native";
 import { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 import dayjs from "dayjs";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+dayjs.extend(isSameOrAfter);
 const Item = List.Item;
 
 const History = ({ navigation }) => {
@@ -12,7 +14,11 @@ const History = ({ navigation }) => {
   useEffect(() => {
     getUserInfo(true).then(res => {
       if (res.code === 2000) {
-        setExamHistory(res.data.user.examHistory || []);
+        const historyList = res.data.user.examHistory || [];
+        historyList.sort((a, b) =>
+          dayjs(b.createdAt).isSameOrAfter(a.createdAt)
+        );
+        setExamHistory(historyList);
         setLoaded(true);
       }
     });

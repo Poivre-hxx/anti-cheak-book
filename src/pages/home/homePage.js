@@ -96,7 +96,11 @@ function HomePage({ navigation }) {
         <Flex justify="center" direction="row">
           <Button
             style={styles.start}
-            onPress={() => navigation.navigate("Exam")}
+            onPress={() =>
+              navigation.navigate("Exam", {
+                type: "user",
+              })
+            }
           >
             <Text style={styles.start_text}>开始</Text>
           </Button>
