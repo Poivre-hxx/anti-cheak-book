@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, ScrollView, ImageBackground, Text } from "react-native";
+import { View, ScrollView, ImageBackground, Text, Image } from "react-native";
 import {
   List,
   Flex,
@@ -23,7 +23,7 @@ function SettlePage({ navigation, route }) {
   };
 
   useEffect(() => {
-    submitAnswers(type, result).then(res => {
+    submitAnswers(type, result).then((res) => {
       if (res.code === 2000) {
         setInfo(res.data);
         setTimeout(() => setLoaded(true), 1000);
@@ -63,6 +63,13 @@ function SettlePage({ navigation, route }) {
             </List>
           </Flex>
         </ImageBackground>
+      </Flex>
+      <Flex justify="center">
+        <Image 
+        source={require("../../assets/imgs/bottom.png")} 
+        style={styles.bot}
+        resizeMode='contain'>
+        </Image>
       </Flex>
     </ScrollView>
   );

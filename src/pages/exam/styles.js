@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   squareDown: {
     borderRadius: 15,
-    width: 308,
+    width: 325,
     height: 300,
     marginTop: 50,
     paddingLeft: 10,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   button: {
     width: 120,
     height: 40,
-  },
+  }
 });
 
 export default styles;

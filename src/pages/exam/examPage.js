@@ -4,6 +4,7 @@ import { List, Flex, Text, Checkbox, Button } from "@ant-design/react-native";
 import { getProblemInfo } from "@/api/problem";
 import styles from "./styles";
 const Item = List.Item;
+const CheckboxItem = Checkbox.CheckboxItem;
 
 const ExamPage = ({ navigation, route }) => {
   const { type } = route.params;
@@ -13,7 +14,7 @@ const ExamPage = ({ navigation, route }) => {
   const [answers, setAnswers] = useState([]);
 
   const handleSubmit = () => {
-    const result = answers.map(el => ({
+    const result = answers.map((el) => ({
       id: el.id,
       answer: [...el.answer].sort().join(","),
     }));
@@ -21,11 +22,11 @@ const ExamPage = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    getProblemInfo(type).then(res => {
+    getProblemInfo(type).then((res) => {
       if (res.code === 2000) {
         setProblemList(res.data.problemList);
         setAnswers(
-          res.data.problemList.map(problem => ({
+          res.data.problemList.map((problem) => ({
             id: problem.id,
             options: problem.options.split(","),
             answer: new Set(),
@@ -90,19 +91,19 @@ const ExamPage = ({ navigation, route }) => {
                   选项
                 </Item>
                 {problemList[index].options.split(",").map((option, _index) => (
-                  <Item
-                    key={_index}
-                    style={styles.ans}
-                    onPress={() => {
-                      const newAnswers = [...answers];
-                      newAnswers[index].answer.has(_index + 1)
-                        ? newAnswers[index].answer.delete(_index + 1)
-                        : newAnswers[index].answer.add(_index + 1);
-                      setAnswers(newAnswers);
-                    }}
-                  >
-                    <Checkbox checked={answers[index].answer.has(_index + 1)}>
-                      <Text style={{ fontSize: 16 }}>{option}</Text>
+                  <Item key={_index} style={styles.ans}>
+                    <Checkbox
+                      checked={answers[index].answer.has(_index + 1)}
+                      multipleLine={true}
+                      onChange={() => {
+                        const newAnswers = [...answers];
+                        newAnswers[index].answer.has(_index + 1)
+                          ? newAnswers[index].answer.delete(_index + 1)
+                          : newAnswers[index].answer.add(_index + 1);
+                        setAnswers(newAnswers);
+                      }}
+                    >
+                      <Text style={{ fontSize: 16, width: 255}}>{option}</Text>
                     </Checkbox>
                   </Item>
                 ))}
