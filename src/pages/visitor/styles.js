@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   bg: {
     position: "absolute",
-    top: 0,
+    top: -40,
     left: 0,
     zIndex: 0,
   },
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   start: {
-    marginTop: 20,
+    marginTop: 50,
     borderRadius: 9,
     backgroundColor: "#F97163",
     margin: 4,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   review: {
-    marginTop: 20,
+    marginTop: 50,
     borderRadius: 9,
     backgroundColor: "#3851B2",
     margin: 4,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   info: {
     width: 320,
     height: 200,
-    marginTop: 100,
+    marginTop: 80,
   },
   info_text: {},
   btn: {

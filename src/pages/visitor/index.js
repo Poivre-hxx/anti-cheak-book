@@ -16,7 +16,7 @@ function VisitorPage({ navigation }) {
   return (
     <Provider>
       <ScrollView style={styles.main}>
-        <Flex justify="center" direction="column" style={{ paddingTop: 40 }}>
+        <Flex justify="center" direction="column" style={{ paddingTop: 130 }}>
           <Image
             source={require("@/assets/imgs/avatar.png")}
             style={styles.photo}

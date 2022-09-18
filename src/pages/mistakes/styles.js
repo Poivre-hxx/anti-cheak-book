@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#fff",
     width: 308,
-    height: 300,
-    marginTop: 50,
+    height: 350,
+    marginTop: 30,
     paddingHorizontal: 10,
   },
   title: {
@@ -28,12 +28,8 @@ const styles = StyleSheet.create({
   },
   ans: {
     width: 308,
-    padding: 10,
-  },
-  button: {
-    width: 120,
-    height: 40,
-    margin: 10,
+    paddingRight: 20,
+    padding: 5,
   },
 });
 

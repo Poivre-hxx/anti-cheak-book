@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     zIndex: 0,
+    marginTop: -45,
   },
   main: {
     zIndex: 1,
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     width: 80,
     borderRadius: 50,
     marginBottom: -135,
-    marginTop: 50,
+    marginTop: 110,
     zIndex: 1,
   },
   photo: {
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   start: {
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 9,
     backgroundColor: "#F97163",
     margin: 4,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   review: {
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 9,
     backgroundColor: "#3851B2",
     margin: 4,
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     width: 108,
     height: 40,
     marginLeft: 35,
-    marginTop: 40,
+    marginTop: 25,
     display: "flex",
     justifyContent: "center",
     alignContent: "center",

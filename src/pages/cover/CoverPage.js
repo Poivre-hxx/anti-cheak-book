@@ -1,67 +1,27 @@
 import { useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  ImageBackground,
-  Image,
-} from "react-native";
+import { Text, View, ScrollView, ImageBackground, Image } from "react-native";
 import { Button, WingBlank, Flex, Carousel } from "@ant-design/react-native";
 import Storage from "@/utils/storage";
+import styles from "./styles";
 
-const Circle = props => {
+const Circle = (props) => {
   const style = {
-    borderRadius: 25,
+    borderRadius: 10,
     backgroundColor: "#3851B2",
     width: 62,
     height: 57,
     margin: 1,
   };
-  return <View style={style}></View>;
+  return (
+    <View style={style}>
+      <Image
+        source={require("@/assets/imgs/Icon.png")}
+        resizeMode="contain"
+        style={styles.icon}
+      ></Image>
+    </View>
+  );
 };
-
-const styles = StyleSheet.create({
-  book: {
-    width: 420,
-    height: 420,
-    marginTop: -50,
-    bottom: 0,
-  },
-  anti: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 50,
-    letterSpacing: 30,
-    marginTop: 150,
-    marginLeft: 30,
-  },
-  text: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 20,
-    letterSpacing: 8,
-    marginTop: 8,
-    marginLeft: 5,
-  },
-  button: {
-    backgroundColor: "#F97163",
-    margin: 25,
-    borderRadius: 15,
-    width: 134,
-    height: 54,
-  },
-  wrapper: {
-    height: 350,
-  },
-  graph: {
-    height: 350,
-    width: 280,
-    flexGrow: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 function CoverPage({ navigation }) {
   useEffect(() => {

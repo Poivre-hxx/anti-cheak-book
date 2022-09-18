@@ -79,7 +79,7 @@ function HomePage({ navigation }) {
         <View style={styles.btn}>
           <Text style={styles.btn_text}>数据分析</Text>
         </View>
-        <Flex justify="center" direction="row">
+        {/* <Flex justify="center" direction="row">
           <ImageBackground
             style={styles.category}
             source={require("@/assets/home/category.png")}
@@ -92,7 +92,7 @@ function HomePage({ navigation }) {
             style={styles.category}
             source={require("@/assets/home/category.png")}
           />
-        </Flex>
+        </Flex> */}
         <Flex justify="center" direction="row">
           <Button
             style={styles.start}
